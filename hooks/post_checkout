@@ -27,7 +27,7 @@ echo "⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯�
 #
 mkdir -p ~/.docker
 jq --null-input --argjson auths "$DOCKERCFG" '. + {auths: $auths}' | \
-jq --arg experimental enabled '. + {experimental: $experimental}' | \
+jq '. + {experimental: true}' | \
 sponge ~/.docker/config.json
 
 echo "✅ Copy qemu binaries into docker build context"
