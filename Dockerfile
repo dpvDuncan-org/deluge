@@ -1,31 +1,24 @@
-# see hooks/build and hooks/.config
 ARG BASE_IMAGE_PREFIX
-FROM ${BASE_IMAGE_PREFIX}alpine
 
-# see hooks/post_checkout
-ARG ARCH
-COPY .gitignore qemu-${ARCH}-static* /usr/bin/
+FROM multiarch/qemu-user-static as qemu
 
-# see hooks/build and hooks/.config
-ARG BASE_IMAGE_PREFIX
 FROM ${BASE_IMAGE_PREFIX}alpine:edge
 
-# see hooks/post_checkout
-ARG ARCH
-COPY qemu-${ARCH}-static /usr/bin
+COPY --from=qemu /usr/bin/qemu-*-static /usr/bin/
 
 ENV PUID=0
 ENV PGID=0
 
 COPY scripts/start.sh /
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    cat /etc/apk/repositories && \
-    apk update && apk upgrade && \
-    apk add --no-cache deluge && \
-    rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/* && \
-    mkdir /config && \
-    chmod -R 777 /start.sh /config
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+RUN apk -U --no-cache upgrade
+RUN apk add --no-cache deluge
+RUN rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+RUN mkdir /config
+RUN chmod -R 777 /start.sh /config
+
+RUN rm -rf /usr/bin/qemu-*-static
 
 # ports and volumes
 EXPOSE 8112 51414 51414/udp
