@@ -17,5 +17,5 @@ then
         USERNAME=deluge
 fi
 
-su - $USERNAME -c 'deluged -c /config -l /config/log/deluged.log -L error'
-su - $USERNAME -c 'deluge-web -d -c /config -l /config/log/deluge-web.log -L error'
+su -g $GROUPNAME $USERNAME -c 'deluged -c /config -l /config/log/deluged.log -L error'
+su -g $GROUPNAME $USERNAME -c 'deluge-web -d -c /config -l /config/log/deluge-web.log -L error'
