@@ -13,7 +13,7 @@ COPY scripts/start.sh /
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk -U --no-cache upgrade
-RUN apk add --no-cache py3-pyhamcrest deluge
+RUN apk add --no-cache deluge
 RUN rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 RUN mkdir /config
 RUN chmod -R 777 /start.sh /config
