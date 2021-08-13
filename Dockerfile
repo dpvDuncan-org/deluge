@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1
 ARG BASE_IMAGE_PREFIX
 
 FROM multiarch/qemu-user-static as qemu
