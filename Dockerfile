@@ -8,12 +8,11 @@ ENV PGID=0
 
 COPY scripts/start.sh /
 
-RUN echo sed -i 's/https/http/g' /etc/apk/repositories
+RUN apk -U --no-cache upgrade
+RUN apk add --no-cache ca-certificates
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-RUN apk -U --no-cache upgrade
-RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache deluge py3-pip
 RUN pip install install setuptools
 RUN rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
