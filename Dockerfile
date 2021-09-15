@@ -8,6 +8,8 @@ ENV PGID=0
 
 COPY scripts/start.sh /
 
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk -U --no-cache upgrade
 RUN apk add --no-cache ca-certificates
