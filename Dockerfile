@@ -10,6 +10,7 @@ COPY scripts/start.sh /
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk -U --no-cache upgrade
+RUN apk add --no-cache ca-certificates
 RUN apk add --no-cache deluge py3-pip
 RUN pip install install setuptools
 RUN rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
