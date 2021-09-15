@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 ARG BASE_IMAGE_PREFIX
 
-FROM ${BASE_IMAGE_PREFIX}alpine:edge
+FROM ${BASE_IMAGE_PREFIX}alpine:latest
 
 ENV PUID=0
 ENV PGID=0
