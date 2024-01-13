@@ -39,7 +39,8 @@ jobs:
       with:
         context: .
         platforms: |
-          linux/arm32/v7
+          linux/arm32v6
+          linux/arm32v7
           linux/amd64
           linux/arm64
         push: true
